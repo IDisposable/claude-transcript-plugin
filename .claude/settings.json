@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(ls:*)",
+      "Bash(mkdir *)",
+      "Bash(rq *)",
+      "Bash(cat:*)",
+      "Bash(git pull:*)",
+      "Bash(git commit:*)",
+      "Bash(git add:*)",
+      "Bash(git push:*)",
+      "Bash(gh pr:*)",
+      "Bash(gh auth:*)",
+      "Bash(gh api:*)",
+      "Bash(do echo:*)"
+    ]
+  },
+  "enabledPlugins": {
+    "transcript-saver@transcript-saver": true
+  }
+}

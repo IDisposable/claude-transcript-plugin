@@ -1,0 +1,28 @@
+{
+  "name": "transcript-saver",
+  "owner": {
+    "name": "IDisposable",
+    "email": "IDisposable@gmail.com"
+  },
+  "metadata": {
+    "description": "Automatically saves readable Markdown transcripts of Claude Code sessions before context compaction",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "transcript-saver",
+      "source": "./",
+      "description": "Automatically saves readable Markdown transcripts of Claude Code sessions before context compaction",
+      "version": "1.0.0",
+      "author": {
+        "name": "Marc Brooks @IDisposable"
+      },
+      "homepage": "https://github.com/IDisposable/claude-transcript-plugin",
+      "repository": "https://github.com/IDisposable/claude-transcript-plugin",
+      "license": "MIT",
+      "keywords": ["transcript", "compaction", "logging", "session", "markdown", "export"],
+      "category": "productivity",
+      "tags": ["transcript", "logging", "markdown", "session-history", "compaction"]
+    }
+  ]
+}

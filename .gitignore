@@ -1,0 +1,15 @@
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Log/OS Files
+*.log
+
+# Keystore files
+*.jks
+*.keystore
+
+# Claude
+.claude/settings.local.json
+
+# VsCode
+.vscode/settings.local.json
