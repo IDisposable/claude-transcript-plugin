@@ -14,6 +14,8 @@
       "Bash(go version:*)",
       "Bash(go build:*)",
       "Bash(go vet:*)",
+      "Bash(golangci-lint run:*)",
+      "Bash(go install:*)",
       "Bash(ls:*)",
       "Bash(mkdir *)",
       "Bash(rq *)",

@@ -102,7 +102,7 @@ func (c *Converter) Convert(jsonlPath, outputPath, cwd string) error {
 	if err != nil {
 		return fmt.Errorf("creating output file: %w", err)
 	}
-	defer out.Close()
+	defer func() { _ = out.Close() }()
 
 	projectName := "unknown"
 	if cwd != "" {
