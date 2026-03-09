@@ -44,5 +44,5 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 - Configurable output directory via `TRANSCRIPT_OUTPUT_DIR` environment variable
 - Default output to `~/.claude/transcripts/`
 
-[2.0.0]: https://github.com/IDisposable/claude-transcript-plugin/releases/tag/v2.0.0
+[2.0.1]: https://github.com/IDisposable/claude-transcript-plugin/releases/tag/v2.0.1
 [1.0.0]: https://github.com/IDisposable/claude-transcript-plugin/releases/tag/v1.0.0

@@ -11,7 +11,9 @@ permissions:
   contents: write
 
 jobs:
-  build:
+  # PR / manual: compile-check all platforms via matrix
+  compile-check:
+    if: "!startsWith(github.ref, 'refs/tags/')"
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -31,25 +33,45 @@ jobs:
         run: |
           EXT=""
           if [ "$GOOS" = "windows" ]; then EXT=".exe"; fi
-          mkdir -p bin
-          go build -o "bin/save-transcript-${GOOS}-${GOARCH}${EXT}" ./cmd/save-transcript/
+          go build -o "save-transcript-${GOOS}-${GOARCH}${EXT}" ./cmd/save-transcript/
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: save-transcript-${{ matrix.goos }}-${{ matrix.goarch }}
-          path: bin/
-
+  # Tagged release: build all platforms, commit binaries to tag, create release
   release:
-    needs: build
     if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v8
-        with:
-          path: artifacts/
-          merge-multiple: true
+      - uses: actions/checkout@v6
 
-      - name: Create release
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.26.1'
+
+      - name: Build all platform binaries
+        run: |
+          mkdir -p bin
+          for GOOS_VAL in linux darwin windows; do
+            for GOARCH_VAL in amd64 arm64; do
+              EXT=""
+              if [ "$GOOS_VAL" = "windows" ]; then EXT=".exe"; fi
+              echo "Building ${GOOS_VAL}/${GOARCH_VAL}..."
+              GOOS=$GOOS_VAL GOARCH=$GOARCH_VAL go build \
+                -o "bin/save-transcript-${GOOS_VAL}-${GOARCH_VAL}${EXT}" \
+                ./cmd/save-transcript/
+            done
+          done
+          chmod +x bin/save-transcript-linux-* bin/save-transcript-darwin-*
+
+      - name: Commit binaries and update tag
+        run: |
+          TAG="${GITHUB_REF#refs/tags/}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f bin/
+          git commit -m "Add pre-built binaries for ${TAG}"
+          git tag -f "${TAG}"
+          git push origin "${TAG}" --force
+
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: artifacts/*
+          files: bin/*
