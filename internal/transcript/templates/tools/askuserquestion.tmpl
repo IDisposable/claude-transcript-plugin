@@ -1,0 +1,12 @@
+{{define "tool_askuserquestion" -}}
+{{- $qs := .Input.questions -}}
+{{- if $qs -}}
+{{- range $i, $q := $qs -}}
+{{- if $i}}
+{{end -}}
+**Question:** {{index $q "question"}}
+{{- end -}}
+{{- else -}}
+**Tool: {{.Name}}**
+{{- end -}}
+{{- end}}

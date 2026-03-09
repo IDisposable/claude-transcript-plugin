@@ -1,0 +1,7 @@
+{{define "tool_edit" -}}
+**Tool: Edit** `{{.Input.file_path}}`
+```diff
+- {{.Input.old_string}}
++ {{.Input.new_string}}
+```
+{{- end}}

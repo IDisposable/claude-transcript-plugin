@@ -1,0 +1,3 @@
+{{define "tool_grep" -}}
+**Tool: Grep** pattern=`{{.Input.pattern}}` path=`{{with .Input.path}}{{.}}{{else}}.{{end}}`
+{{- end}}

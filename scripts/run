@@ -1,0 +1,36 @@
+#!/bin/sh
+# Detect OS and architecture, then run the appropriate save-transcript binary.
+# This shim is invoked by the Claude Code PreCompact hook.
+
+set -e
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PLUGIN_ROOT="$(dirname "$SCRIPT_DIR")"
+BIN_DIR="$PLUGIN_ROOT/bin"
+
+# Detect OS
+case "$(uname -s)" in
+    Linux*)   OS=linux ;;
+    Darwin*)  OS=darwin ;;
+    MINGW*|MSYS*|CYGWIN*) OS=windows ;;
+    *)        OS=linux ;;
+esac
+
+# Detect architecture
+case "$(uname -m)" in
+    x86_64|amd64)  ARCH=amd64 ;;
+    arm64|aarch64) ARCH=arm64 ;;
+    *)             ARCH=amd64 ;;
+esac
+
+BINARY="$BIN_DIR/save-transcript-${OS}-${ARCH}"
+if [ "$OS" = "windows" ]; then
+    BINARY="${BINARY}.exe"
+fi
+
+if [ ! -f "$BINARY" ]; then
+    echo "transcript-saver: binary not found: $BINARY" >&2
+    exit 0
+fi
+
+exec "$BINARY" "$@"

@@ -11,5 +11,8 @@ local.properties
 # Claude
 .claude/settings.local.json
 
+# Built binaries
+bin/
+
 # VsCode
 .vscode/settings.local.json
