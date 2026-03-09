@@ -11,9 +11,9 @@ Save the current session's conversation to a readable Markdown file.
 
 1. Find the current session's JSONL transcript file. It is located at the path shown in the session metadata, typically under `~/.claude/projects/`.
 
-2. Run the transcript converter script:
+2. Run the transcript converter:
    ```bash
-   echo '{"session_id": "<session-id>", "transcript_path": "<path-to-jsonl>", "cwd": "<current-working-dir>"}' | python3 ${CLAUDE_PLUGIN_ROOT}/scripts/save-transcript.py
+   echo '{"session_id": "<session-id>", "transcript_path": "<path-to-jsonl>", "cwd": "<current-working-dir>"}' | ${CLAUDE_PLUGIN_ROOT}/scripts/run
    ```
 
 3. Report the output file path to the user.

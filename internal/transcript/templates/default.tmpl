@@ -1,0 +1,69 @@
+{{- /* Default transcript template — structural blocks for the document layout.
+   Tool-specific templates live in templates/tools/*.tmpl (one file per tool).
+   External overrides are loaded from the tools directory (--tools-dir).
+   Unknown tools automatically fall back to "tool_default". */ -}}
+
+{{define "header" -}}
+# Session Transcript: {{.ProjectName}}
+
+{{if .SessionStart -}}
+**Started:** {{.SessionStart}}{{mdBr}}
+{{end -}}
+**Project:** `{{.Cwd}}`{{mdBr}}
+**Transcript source:** `{{.TranscriptPath}}`{{mdBr}}
+
+---
+
+{{end}}
+
+{{define "branch" -}}
+> *Branch: `{{.Branch}}`*
+
+{{end}}
+
+{{define "user" -}}
+## User{{.Timestamp}}
+
+{{.Content}}
+
+---
+
+{{end}}
+
+{{define "tool_response" -}}
+### Tool Response{{.Timestamp}}
+
+{{.Content}}
+
+---
+
+{{end}}
+
+{{define "assistant" -}}
+## Claude{{.Timestamp}}
+
+{{.Content}}
+
+---
+
+{{end}}
+
+{{define "tool_default" -}}
+**Tool: {{.Name}}**
+{{- end}}
+
+{{define "tool_result" -}}
+<details><summary>Tool Result</summary>
+
+```
+{{.Content}}
+```
+</details>
+{{- end}}
+
+{{define "thinking" -}}
+<details><summary>Thinking</summary>
+
+{{.Preview}}
+</details>
+{{- end}}

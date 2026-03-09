@@ -1,0 +1,6 @@
+{{define "tool_bash" -}}
+**Tool: Bash**{{with .Input.description}} — {{.}}{{end}}
+```bash
+{{.Input.command}}
+```
+{{- end}}
