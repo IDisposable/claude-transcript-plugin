@@ -4,19 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/).
 
-## [2.1.0] - 2026-03-11
+## [2.1.1] - 2026-03-11
 
 ### Changed
 
-- Fixed version numbering and remove redundant uses
-- Added description to SKILL.md frontmatter
-- Fixed CHANGELOG.md (was lagging version number)
 - Truncated values use an actual ellipsis `…` character
+- Fixed CHANGELOG.md (was lagging version number)
+- Fixed version numbering and remove redundant uses
 
 ### Added
 
-- **Go unit tests**
+- Added `{{ucEllip}}` templateFunc to easily emit a Unicode ellipsis `…` instead of `...`
+- Added description to SKILL.md frontmatter
 - Suggest [plugin-dev@claude-plugins-official](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/plugin-dev) for project development
+- **Go unit tests**
 
 ## [2.0.1] - 2026-03-09
 

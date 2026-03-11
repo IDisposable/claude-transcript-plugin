@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+	"text/template"
 )
 
 // jsonlEntry constructs a single JSONL line for test transcripts.
@@ -66,6 +67,79 @@ func convertToString(t *testing.T, conv *Converter, jsonlPath, cwd string) strin
 		t.Fatalf("reading output: %v", err)
 	}
 	return string(data)
+}
+
+func TestTemplateFuncs(t *testing.T) {
+	// execFunc renders a minimal template using templateFuncs and returns the output.
+	execFunc := func(t *testing.T, tmplText string) string {
+		t.Helper()
+		tmpl, err := template.New("test").Funcs(templateFuncs).Parse(tmplText)
+		if err != nil {
+			t.Fatalf("parse template: %v", err)
+		}
+		var buf strings.Builder
+		if err := tmpl.Execute(&buf, nil); err != nil {
+			t.Fatalf("execute template: %v", err)
+		}
+		return buf.String()
+	}
+
+	t.Run("mdBr returns two trailing spaces for Markdown line break", func(t *testing.T) {
+		got := execFunc(t, `line one{{mdBr}}`)
+		if got != "line one  " {
+			t.Errorf("got %q, want %q", got, "line one  ")
+		}
+	})
+
+	t.Run("ucEllip returns Unicode ellipsis character", func(t *testing.T) {
+		got := execFunc(t, `truncated{{ucEllip}}`)
+		if got != "truncated…" {
+			t.Errorf("got %q, want %q", got, "truncated…")
+		}
+	})
+
+	t.Run("mdBr is used in header template output", func(t *testing.T) {
+		conv := testConverter(t)
+		got := conv.renderToString("header", HeaderData{
+			ProjectName:    "test-proj",
+			SessionStart:   "2026-03-10T14:30:00Z",
+			Cwd:            "/test",
+			TranscriptPath: "/test/transcript.jsonl",
+		})
+		// Each header field line should end with two trailing spaces (mdBr)
+		for _, line := range strings.Split(got, "\n") {
+			if strings.HasPrefix(line, "**Project:") ||
+				strings.HasPrefix(line, "**Started:") ||
+				strings.HasPrefix(line, "**Transcript source:") {
+				if !strings.HasSuffix(line, "  ") {
+					t.Errorf("header line missing mdBr trailing spaces: %q", line)
+				}
+			}
+		}
+	})
+
+	t.Run("ucEllip is available in external template overrides", func(t *testing.T) {
+		dir := t.TempDir()
+		tmpl := `{{define "tool_read"}}**Read** {{.Input.file_path}}{{ucEllip}}{{end}}`
+		if err := os.WriteFile(filepath.Join(dir, "read.tmpl"), []byte(tmpl), 0644); err != nil {
+			t.Fatal(err)
+		}
+
+		c, err := NewConverter("default", dir)
+		if err != nil {
+			t.Fatalf("unexpected error: %v", err)
+		}
+
+		block := ContentBlock{
+			Type:  "tool_use",
+			Name:  "Read",
+			Input: map[string]interface{}{"file_path": "/foo.go"},
+		}
+		got := c.formatToolUse(block)
+		if !strings.HasSuffix(strings.TrimSpace(got), "…") {
+			t.Errorf("ucEllip not rendered in external template, got: %q", got)
+		}
+	})
 }
 
 func TestNewConverter(t *testing.T) {

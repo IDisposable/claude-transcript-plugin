@@ -238,6 +238,7 @@ There may be template rendering that is difficult or non-obvious to express in m
 | Function | Output | Purpose |
 | ---------- | -------- | --------- |
 | `{{mdBr}}` | `  ` (two spaces) | Markdown line break — use instead of invisible trailing spaces |
+| `{{ucEllip}}` | `…` (Unicode ellipsis) | [Unicode ellipsis](https://www.compart.com/en/unicode/U+2026) - use to easily indicate truncations with `…` instead of `...` |
 
 ### Adding a built-in template variant
 
