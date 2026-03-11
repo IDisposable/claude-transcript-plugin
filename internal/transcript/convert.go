@@ -36,6 +36,10 @@ var templateFuncs = template.FuncMap{
 	// mdBr returns two trailing spaces for a Markdown line break.
 	// Use {{mdBr}} at the end of a line instead of invisible trailing spaces.
 	"mdBr": func() string { return "  " },
+
+	// ucEllip returns a Unicode ellipsis character.
+	// Use {{ucEllip}} in templates instead of "..." for better typography.
+	"ucEllip": func() string { return "…" },
 }
 
 // loadTemplate assembles templates in three layers (later definitions override earlier):

@@ -47,9 +47,14 @@ jobs:
       - name: go test
         run: go test -race -coverprofile=coverage.out ./...
 
-      - name: Upload coverage
+      - name: Upload coverage artifact
         if: github.event_name == 'pull_request'
         uses: actions/upload-artifact@v7
         with:
           name: coverage
           path: coverage.out
+
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          files: coverage.out

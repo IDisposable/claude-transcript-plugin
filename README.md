@@ -1,5 +1,9 @@
 # transcript-saver
 
+[![license](http://img.shields.io/badge/license-MIT-red.svg?style=flat)](https://raw.githubusercontent.com/IDisposable/claude-transcript-plugin/master/LICENSE) [![Build Status](https://github.com/IDisposable/claude-transcript-plugin/actions/workflows/build.yml/badge.svg)](https://github.com/IDisposable/claude-transcript-plugin/actions/workflows/build.yml)
+[![CI](https://github.com/IDisposable/claude-transcript-plugin/actions/workflows/ci.yml/badge.svg)](https://github.com/IDisposable/claude-transcript-plugin/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/IDisposable/claude-transcript-plugin/graph/badge.svg)](https://codecov.io/gh/IDisposable/claude-transcript-plugin)
+
 A Claude Code plugin that automatically saves readable Markdown transcripts of your sessions before context compaction.
 
 ## What It Does
@@ -238,6 +242,7 @@ There may be template rendering that is difficult or non-obvious to express in m
 | Function | Output | Purpose |
 | ---------- | -------- | --------- |
 | `{{mdBr}}` | `  ` (two spaces) | Markdown line break — use instead of invisible trailing spaces |
+| `{{ucEllip}}` | `…` (Unicode ellipsis) | [Unicode ellipsis](https://www.compart.com/en/unicode/U+2026) - use to easily indicate truncations with `…` instead of `...` |
 
 ### Adding a built-in template variant
 
