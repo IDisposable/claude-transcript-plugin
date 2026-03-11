@@ -1,6 +1,6 @@
 {
   "name": "transcript-saver",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "Automatically saves readable Markdown transcripts of Claude Code sessions before context compaction",
   "author": {
     "name": "Marc Brooks @IDisposable",

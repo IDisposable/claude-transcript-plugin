@@ -16,3 +16,6 @@ bin/
 
 # VsCode
 .vscode/settings.local.json
+
+# Go test coverage output
+coverage.out
