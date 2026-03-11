@@ -189,8 +189,8 @@ func (c *Converter) formatToolResult(block ContentBlock) string {
 	if strings.TrimSpace(resultText) == "" {
 		return ""
 	}
-	if len(resultText) > 2000 {
-		resultText = resultText[:2000] + "\n... (truncated)"
+	if runes := []rune(resultText); len(runes) > 2000 {
+		resultText = string(runes[:2000]) + "\n… (truncated)"
 	}
 	return c.renderToString("tool_result", ToolResultData{Content: resultText})
 }
@@ -241,10 +241,11 @@ func extractToolResultText(raw json.RawMessage) string {
 	return strings.Join(texts, "\n")
 }
 
-// truncate shortens a string to maxLen, appending "..." if truncated.
+// truncate shortens a string to maxLen runes, appending "…" if truncated.
 func truncate(s string, maxLen int) string {
-	if len(s) <= maxLen {
+	runes := []rune(s)
+	if len(runes) <= maxLen {
 		return s
 	}
-	return s[:maxLen] + "..."
+	return string(runes[:maxLen]) + "…"
 }

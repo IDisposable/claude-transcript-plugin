@@ -25,7 +25,7 @@ claude-transcript-plugin/
 │   │   └── tools/               # One .tmpl file per tool (modular, overridable)
 │   │       ├── bash.tmpl
 │   │       ├── read.tmpl
-│   │       └── ...
+│   │       └── …
 │   ├── types.go                 # Data types
 │   ├── parser.go                # JSONL parsing, classification, tool formatting
 │   ├── config.go                # Config file loading and merging
