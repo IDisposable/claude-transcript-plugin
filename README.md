@@ -19,6 +19,10 @@ When Claude Code compacts your conversation context (either automatically or via
 - Thinking blocks in collapsible sections
 - System noise filtered out
 
+### Why?
+
+See <img width="1433" height="706" alt="image" src="https://github.com/user-attachments/assets/49b95b7d-4282-4bd0-9427-2e7c1bb6110b" />
+
 ## Installation
 
 ### From Marketplace
@@ -353,10 +357,6 @@ To add truncation for a new tool, add an entry to this map.
 | `skills/save-transcript/` | Manual `/transcript-saver:save-transcript` skill |
 
 The hook receives the session's `transcript_path` from Claude Code via stdin JSON, reads the JSONL file, and writes a formatted Markdown file. It exits cleanly on any error (including panics) so it never blocks compaction.
-
-### Why?
-
-See <img width="1433" height="706" alt="image" src="https://github.com/user-attachments/assets/49b95b7d-4282-4bd0-9427-2e7c1bb6110b" />
 
 ## Development
 
