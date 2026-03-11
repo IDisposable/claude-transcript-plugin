@@ -1,4 +1,5 @@
 {
+  "description": "Save Markdown transcript before context compaction",
   "hooks": {
     "PreCompact": [
       {

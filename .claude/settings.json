@@ -25,6 +25,7 @@
     ]
   },
   "enabledPlugins": {
-    "transcript-saver@transcript-saver": true
+    "transcript-saver@transcript-saver": true,
+    "plugin-dev@claude-plugins-official": true
   }
 }
