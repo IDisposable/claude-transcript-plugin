@@ -23,6 +23,19 @@ When Claude Code compacts your conversation context (either automatically or via
 
 See <img width="1433" height="706" alt="image" src="https://github.com/user-attachments/assets/49b95b7d-4282-4bd0-9427-2e7c1bb6110b" />
 
+### TL;DR
+
+```bash
+/plugin marketplace add IDisposable/claude-transcript-plugin
+/plugin install transcript-saver@transcript-saver
+```
+
+```claude
+/compact
+```
+
+Transcripts by default are in `~/.claude/transcripts/` or `C:\User\you\.claude\templates\`
+
 ## Installation
 
 ### From Marketplace
