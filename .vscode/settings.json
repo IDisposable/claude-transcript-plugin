@@ -1,0 +1,5 @@
+{
+  "go-template.patterns": [
+    "**/*.tmpl"
+  ]
+}

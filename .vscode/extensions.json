@@ -1,6 +1,6 @@
 {
   "recommendations": [
-    "jinliming2.vscode-go-template",
-    "golang.go"
+    "golang.go",
+    "jinliming2.vscode-go-template"
   ]
 }

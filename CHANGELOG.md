@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [2.1.2] - 2026-03-13
+
+### Changed
+
+- Added `settings.json` for VSCode to apply the [`jinliming2.vscode-go-template`](https://marketplace.visualstudio.com/items?itemName=jinliming2.vscode-go-template) to our `**/*.tmpl` files for syntax rendering
+
 ## [2.1.1] - 2026-03-11
 
 ### Changed
